@@ -1,0 +1,16 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Local configuration
+config.ini
+
+# Desktop launcher files (machine-specific)
+*.desktop
+
+# Editor / OS junk
+.DS_Store
+*.swp
+*~
+
