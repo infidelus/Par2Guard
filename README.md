@@ -10,6 +10,8 @@ Par2Guard is particularly useful for protecting large collections of data such a
 music libraries, documents, archives, and backups against corruption or accidental
 data loss.
 
+![Par2Guard main window](screenshots/main_window.png)
+
 ---
 
 ## Features
