@@ -462,7 +462,7 @@ class CreateTab(Gtk.Box):
         self.redundancy.set_value(_coerce_int(cfg_get("redundancy_percent", "10"), 10))
 
         self.archive_name = Gtk.Entry()
-        self.archive_name.set_placeholder_text('e.g. "Now 117 D2" (base name, without .par2)')
+        self.archive_name.set_placeholder_text('e.g. "My Groovy Tunes" (base name, without .par2)')
 
         self.chk_recursive = Gtk.CheckButton.new_with_label("Include subfolders when adding folders (recursive)")
         self.chk_recursive.set_active(False)
