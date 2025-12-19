@@ -277,9 +277,11 @@ class Runner:
                         stdout=subprocess.PIPE,
                         stderr=subprocess.STDOUT,
                         text=True,
+                        encoding="utf-8",
+                        errors="replace",
                         bufsize=1,
-                        universal_newlines=True,
                     )
+
                 assert self._proc.stdout is not None
                 for line in self._proc.stdout:
                     keep_tail(line)
