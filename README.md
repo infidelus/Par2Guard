@@ -1,7 +1,7 @@
 # Par2Guard
 
 Par2Guard is a modern Python 3 GUI for creating, verifying, and repairing PAR2 parity files.  
-It provides a user-friendly desktop interface for the standard `par2cmdline` tool, making parity operations easy and accessible.:contentReference[oaicite:1]{index=1}
+It provides a user-friendly desktop interface for the standard `par2cmdline` tool, making parity operations easy and accessible.
 
 ---
 
