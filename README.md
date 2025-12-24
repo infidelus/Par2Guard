@@ -1,45 +1,60 @@
 # Par2Guard
 
-Par2Guard is a modern Python 3 GUI for creating, verifying, and repairing PAR2 parity files.
+Par2Guard is a modern Python 3 GUI for creating, verifying, and repairing PAR2 parity files.  
+It provides a user-friendly desktop interface for the standard `par2cmdline` tool, making parity operations easy and accessible.:contentReference[oaicite:1]{index=1}
 
-It is written in Python and designed to be cross-platform, though it is currently
-tested primarily on Linux systems using GTK 3 (such as Linux Mint and Ubuntu).
-Par2Guard acts as a clean and simple front-end to the standard `par2cmdline` tool.
+---
 
-Par2Guard is particularly useful for protecting large collections of data such as
-music libraries, documents, archives, and backups against corruption or accidental
-data loss.
+## 🆕 What’s New in **v1.1.0**
+
+This release includes **significant improvements and quality-of-life enhancements** since v1.0.1:
+
+### ✨ Improvements
+- **Consistent structured logging** with set/folder names shown before each PAR2 run for clearer context.
+- **Improved UI feedback** — better status messages and clearer separation between operations in the log.
+- **Block size handling fixes** — automatic normalization to valid PAR2 block sizes (multiples of 4 bytes).
+- **Overwrite handling enhanced** — correctly deletes existing PAR2 sets across all selected folders before regenerating.
+- **Code reorganization and documentation clean-up** — section headers and docstrings added for maintainability.
+- **PEP 8 styling applied** throughout the main script for better readability and future contributions.
+- **Improved default config persistence** and UI restore behavior for advanced settings.
+
+These improvements make Par2Guard easier to use, more robust, and more maintainable going forward.
 
 ![Par2Guard main window](screenshots/main_window.png)
 
 ---
 
-## Features
+## 📦 Features
+
+Par2Guard provides:
 
 - Create PAR2 parity files with configurable redundancy
-- Verify existing PAR2 sets (single files or entire directory trees)
+- Verify existing PAR2 sets (single files or whole folder trees)
 - Repair damaged or missing files when sufficient parity data exists
 - Clean, readable logging with optional verbose output
 - Clear end-of-run summaries showing:
   - items that are OK
   - items that require repair
   - items that were repaired or failed
-- Automatically processes multiple folders (one PAR2 set per folder)
-- GTK 3 desktop GUI
-- Project-local configuration file (`config.ini`)
+- Automatic creation of one PAR2 set per folder when multiple folders are selected
+- GTK 3 desktop GUI with intuitive controls
+- Project-local configuration file (`config.ini`) for persistent settings
 
 ---
 
-## Requirements
+## 📋 Requirements
 
 - Python 3.9 or newer
 - GTK 3 with PyGObject
-- `par2cmdline` (`par2`)
+- `par2cmdline` (`par2`) installed and in your PATH
 
-### Installing dependencies (Ubuntu / Linux Mint)
+---
+
+## 🛠 Installing Dependencies (Ubuntu / Linux Mint)
 
 ```bash
 sudo apt install par2 python3-gi python3-gi-cairo gir1.2-gtk-3.0
+
 ```
 
 ---
@@ -72,20 +87,11 @@ redundancy_percent=10
 verbose_logging=0
 ```
 
-### Configuration options
+- default_path – Starting folder used when file chooser dialogs open
+- redundancy_percent – Default redundancy percentage for PAR2 creation
+- verbose_logging – 0 for clean output, 1 to show full PAR2 progress
 
-- `default_path`
-  The starting folder used when file chooser dialogs open
-
-- `redundancy_percent`
-  Default redundancy percentage used when creating PAR2 files
-
-- `verbose_logging`
-  `0` for clean output
-  `1` to show full PAR2 progress output
-
-While the application is running, Par2Guard remembers the last folder used.
-The `default_path` value is not overwritten automatically.
+The app also remembers the last opened folder during the current session.
 
 ---
 
@@ -95,44 +101,40 @@ The `default_path` value is not overwritten automatically.
 
 1. Open the Create tab
 2. Add files or one or more folders
-3. Choose the redundancy percentage
+3. Choose redundancy or recovery block settings
 4. Click Create PAR2
 
-If multiple folders are added, Par2Guard automatically creates one PAR2 set per
-folder and stores the parity files inside each folder.
+If multiple folders are selected, each will get its own PAR2 set.
 
 ---
 
 ### Verifying files
 
 1. Open the Verify tab
-2. Add individual `.par2` files or scan a folder recursively
+2. Add .par2 files or scan a folder recursively
 3. Click Verify
 
-At the end of the run, Par2Guard displays a summary listing items that require repair.
+At the end, a summary is displayed for items requiring repair.
 
 ---
 
 ### Repairing files
 
 1. Open the Repair tab
-2. Add `.par2` files or scan a folder recursively
+2. Add .par2 files or scan a folder
 3. Click Repair
 
-Only the main `.par2` file is required. Associated `.vol*.par2` files are detected
-automatically.
+Only the main .par2 file is required — associated .vol*.par2 files are included automatically.
 
 ---
 
 ## Desktop Integration (Optional)
 
-You can integrate Par2Guard into your desktop environment using a `.desktop` file.
-
-Example `par2guard.desktop`:
+You can add Par2Guard to your desktop environment using a .desktop file. For example:
 
 ```ini
 [Desktop Entry]
-Version=1.0
+Version=1.1.0
 Type=Application
 Name=Par2Guard
 Comment=Create, verify and repair PAR2 parity files
@@ -153,11 +155,7 @@ Copy the file to:
 
 ## About PAR2
 
-PAR2 files are parity recovery files that allow damaged or missing data to be
-reconstructed, provided enough recovery data exists. They are commonly used for
-archives, backups, and large media collections.
-
-Par2Guard uses the system `par2` / `par2cmdline` tool for all parity operations.
+PAR2 files are parity recovery files that allow reconstruction of damaged or missing data, provided sufficient recovery blocks exist. They are commonly used for backups, large media collections, and archives. Par2Guard invokes the system par2 / par2cmdline tool for all operations.
 
 ---
 
@@ -167,16 +165,13 @@ Par2Guard is inspired by the original PyPAR2 project:
 
 https://pypar2.fingelrest.net/
 
-This project is not affiliated with PyPAR2. It exists to provide a modern Python 3
-replacement with similar goals.
+This project is not affiliated with PyPAR2. It exists to provide a modern Python 3 replacement with similar goals.
 
 ---
 
 ## License
 
-Par2Guard is released under the MIT License.
-
-See the LICENSE file for details.
+Par2Guard is released under the MIT License. See the LICENSE file for details.
 
 ---
 
