@@ -5,21 +5,6 @@ It provides a user-friendly desktop interface for the standard `par2cmdline` too
 
 ---
 
-## 🆕 What’s New in **v1.1.0**
-
-This release includes **significant improvements and quality-of-life enhancements** since v1.0.1:
-
-### ✨ Improvements
-- **Consistent structured logging** with set/folder names shown before each PAR2 run for clearer context.
-- **Improved UI feedback** — better status messages and clearer separation between operations in the log.
-- **Block size handling fixes** — automatic normalization to valid PAR2 block sizes (multiples of 4 bytes).
-- **Overwrite handling enhanced** — correctly deletes existing PAR2 sets across all selected folders before regenerating.
-- **Code reorganization and documentation clean-up** — section headers and docstrings added for maintainability.
-- **PEP 8 styling applied** throughout the main script for better readability and future contributions.
-- **Improved default config persistence** and UI restore behavior for advanced settings.
-
-These improvements make Par2Guard easier to use, more robust, and more maintainable going forward.
-
 ![Par2Guard main window](screenshots/main_window.png)
 
 ---
@@ -37,6 +22,7 @@ Par2Guard provides:
   - items that require repair
   - items that were repaired or failed
 - Automatic creation of one PAR2 set per folder when multiple folders are selected
+- Automatically names PAR2 sets for multi-disc albums as “Album – disc N”
 - GTK 3 desktop GUI with intuitive controls
 - Project-local configuration file (`config.ini`) for persistent settings
 
