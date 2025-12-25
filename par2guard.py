@@ -26,6 +26,7 @@ import subprocess
 import threading
 import time
 import configparser
+import re
 from pathlib import Path
 from typing import Callable, Optional, List, Tuple, Dict, Any
 
@@ -58,6 +59,11 @@ DEFAULTS = {
     "recovery_blocks": "100",
 }
 
+DISC_RE = re.compile(
+    r"^(disc|disk|cd)\s*\d+$",
+    re.IGNORECASE,
+)
+
 
 # -----------------------------------------------------------------------------
 # Utility helper functions
@@ -72,6 +78,25 @@ def _coerce_int(s: str, default: int) -> int:
         return int(str(s).strip())
     except Exception:
         return default
+
+def derive_archive_base(folder: Path, user_base: str, multi: bool) -> str:
+    """
+    Determine archive base name.
+
+    - If user_base is set and we're not multi-folder: use it.
+    - If folder is a disc subfolder, prefix with parent folder name.
+    - Otherwise, default to folder name.
+    """
+    if user_base and not multi:
+        return user_base
+
+    name = folder.name
+    parent = folder.parent.name if folder.parent else ""
+
+    if DISC_RE.match(name) and parent:
+        return f"{parent} - {name}"
+
+    return name
 
 
 # -----------------------------------------------------------------------------
@@ -944,10 +969,18 @@ class CreateTab(Gtk.Box):
             rel_files = [os.path.relpath(f, cwd) for f in folder_files]
 
             # Label is folder name, used for status/log context.
-            label = Path(cwd).name or "create"
+            folder_path = Path(cwd)
+            label = folder_path.name or "create"
 
             # If user selected multiple folders, we force per-folder archive base name.
-            base_name = user_base if (not multi and user_base) else label
+            base_name = derive_archive_base(
+                folder=folder_path,
+                user_base=user_base,
+                multi=multi,
+            )
+
+            # Use the actual archive name everywhere (log, status, summaries)
+            label = base_name
 
             argv = [PAR2_BIN, "c"]
 
