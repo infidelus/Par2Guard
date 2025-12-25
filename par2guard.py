@@ -44,6 +44,7 @@ from gi.repository import Gtk, Gdk, GLib
 # -----------------------------------------------------------------------------
 
 APP_TITLE = "Par2Guard"
+APP_VERSION = "1.1.2"
 PAR2_BIN = "par2"
 
 APP_DIR = Path(__file__).resolve().parent
@@ -1190,10 +1191,10 @@ class VerifyRepairTab(Gtk.Box):
             label = par2_set_key_from_filename(fname) or Path(cwd).name
 
             if self.mode == "verify":
-                argv = [PAR2_BIN, "V", fname]
+                argv = [PAR2_BIN, "V", "--", fname]
                 jobs.append((argv, cwd, "verify", label))
             else:
-                argv = [PAR2_BIN, "R", fname]
+                argv = [PAR2_BIN, "R", "--", fname]
                 jobs.append((argv, cwd, "repair", label))
 
         self.runner.run_many(jobs)
@@ -1356,6 +1357,7 @@ class MainWindow(Gtk.Window):
             text="Par2Guard",
         )
         d.format_secondary_text(
+            f"Version {APP_VERSION}\n\n"
             "A GUI for creating, verifying and repairing PAR2 parity files.\n"
             "Uses the system 'par2' / par2cmdline tool.\n\n"
             "Inspired by the original PyPAR2 project:\n"

@@ -139,6 +139,13 @@ Copy the file to:
 
 ---
 
+## Version history
+
+A detailed list of changes for each release can be found in
+[CHANGELOG.md](CHANGELOG.md).
+
+---
+
 ## About PAR2
 
 PAR2 files are parity recovery files that allow reconstruction of damaged or missing data, provided sufficient recovery blocks exist. They are commonly used for backups, large media collections, and archives. Par2Guard invokes the system par2 / par2cmdline tool for all operations.
